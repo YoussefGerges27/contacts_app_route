@@ -5,12 +5,14 @@ class CustomTextFormfeild extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final Function(String value) onChange;
+  final FormFieldValidator validator;
 
   const CustomTextFormfeild({
     super.key,
     required this.hintText,
     required this.controller,
     required this.onChange,
+    required this.validator,
   });
 
   @override
@@ -18,6 +20,7 @@ class CustomTextFormfeild extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onChanged: onChange,
+      validator: validator,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(20),
         hintText: hintText,

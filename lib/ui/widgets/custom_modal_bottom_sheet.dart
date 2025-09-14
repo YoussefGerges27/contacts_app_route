@@ -1,5 +1,6 @@
 import 'package:contacts/core/app_colors.dart';
 import 'package:contacts/core/models/contact_model.dart';
+import 'package:contacts/core/validation.dart';
 import 'package:contacts/ui/widgets/custom_text_form_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -93,10 +94,17 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
           ),
           Form(
             key: formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               spacing: 16,
               children: [
                 CustomTextFormfeild(
+                  validator: (value) {
+                    return Validation.validateNotEmpty(
+                      value: value,
+                      message: 'Please enter a user name',
+                    );
+                  },
                   onChange: (value) {
                     name = userNameController.text;
                     setState(() {});
@@ -105,6 +113,9 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                   hintText: "Enter User Name",
                 ),
                 CustomTextFormfeild(
+                  validator: (value) {
+                    return Validation.validateEmail(value);
+                  },
                   onChange: (value) {
                     email = emailController.text;
                     setState(() {});
@@ -113,6 +124,12 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                   hintText: "Enter User Email",
                 ),
                 CustomTextFormfeild(
+                  validator: (value) {
+                    return Validation.validateNotEmpty(
+                      value: value,
+                      message: 'Please enter a phone number',
+                    );
+                  },
                   onChange: (value) {
                     phone = phoneNumberController.text;
                     setState(() {});
@@ -134,16 +151,7 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
               ),
             ),
             onPressed: () {
-              widget.contacts.add(
-                ContactModel(
-                  image: "assets/images/messi.png",
-                  name: userNameController.text,
-                  email: emailController.text,
-                  phone: phoneNumberController.text,
-                ),
-              );
-              widget.onAdd();
-              Navigator.pop(context);
+              addContact();
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -160,16 +168,18 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
     );
   }
 
-  // void addContact() {
-  //   widget.contacts.add(
-  //     ContactModel(
-  //       image: "assets/images/messi.png",
-  //       name: userNameController.text,
-  //       email: emailController.text,
-  //       phone: phoneNumberController.text,
-  //     ),
-  //   );
-  //   widget.onAdd();
-  //   Navigator.pop(context);
-  // }
+  void addContact() {
+    if (formKey.currentState!.validate()) {
+      widget.contacts.add(
+        ContactModel(
+          image: "assets/images/messi.png",
+          name: userNameController.text,
+          email: emailController.text,
+          phone: phoneNumberController.text,
+        ),
+      );
+      widget.onAdd();
+      Navigator.pop(context);
+    }
+  }
 }
