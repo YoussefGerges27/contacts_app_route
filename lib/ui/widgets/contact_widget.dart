@@ -1,0 +1,96 @@
+import 'package:contacts/core/app_colors.dart';
+import 'package:contacts/core/models/contact_model.dart';
+import 'package:flutter/material.dart';
+
+class ContactWidget extends StatelessWidget {
+  final ContactModel contact;
+  final VoidCallback deleteIndex;
+  const ContactWidget({
+    super.key,
+    required this.contact,
+    required this.deleteIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.gold,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              Image.asset(
+                "assets/images/messi.png",
+                fit: BoxFit.fill,
+              ),
+              Container(
+                padding: EdgeInsets.all(8),
+                margin: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.gold,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  contact.name,
+                  style: TextStyle(
+                    color: AppColors.darkBlue,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          ListTile(
+            leading: Icon(Icons.email),
+            title: Text(
+              contact.email,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.phone),
+            title: Text(
+              contact.phone,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xffF93E3E),
+                foregroundColor: AppColors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(8),
+                ),
+              ),
+              onPressed: () {
+                deleteIndex();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.delete),
+                  SizedBox(width: 8),
+                  Text("Delete"),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
