@@ -21,7 +21,7 @@ class ContactsScreen extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
-          childAspectRatio: 1 / 1.9,
+          childAspectRatio: 1 / 1.65,
         ),
         itemCount: contacts.length,
         itemBuilder: (context, index) {

@@ -34,8 +34,9 @@ class ContactWidget extends StatelessWidget {
                       ),
                       child: Image.file(
                         contact.image!,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                         width: double.infinity,
+                        height: 150,
                       ),
                     ),
               Container(
@@ -57,54 +58,58 @@ class ContactWidget extends StatelessWidget {
             ],
           ),
 
-          ListTile(
-            leading: SvgPicture.asset(
-              "assets/icons/email.svg",
-              width: 25,
-            ),
-            title: Text(
-              contact.email,
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          ListTile(
-            leading: SvgPicture.asset(
-              "assets/icons/phone.svg",
-              width: 25,
-            ),
-            title: Text(
-              contact.phone,
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xffF93E3E),
-                foregroundColor: AppColors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(8),
+          Column(
+            children: [
+              ListTile(
+                leading: SvgPicture.asset(
+                  "assets/icons/email.svg",
+                  width: 25,
+                ),
+                title: Text(
+                  contact.email,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-              onPressed: () {
-                deleteIndex();
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.delete),
-                  SizedBox(width: 8),
-                  Text("Delete"),
-                ],
+              ListTile(
+                leading: SvgPicture.asset(
+                  "assets/icons/phone.svg",
+                  width: 25,
+                ),
+                title: Text(
+                  contact.phone,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xffF93E3E),
+                    foregroundColor: AppColors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(8),
+                    ),
+                  ),
+                  onPressed: () {
+                    deleteIndex();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.delete),
+                      SizedBox(width: 8),
+                      Text("Delete"),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
