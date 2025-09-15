@@ -60,7 +60,7 @@ class ContactWidget extends StatelessWidget {
           ListTile(
             leading: SvgPicture.asset(
               "assets/icons/email.svg",
-              width: 30,
+              width: 25,
             ),
             title: Text(
               contact.email,
@@ -73,7 +73,7 @@ class ContactWidget extends StatelessWidget {
           ListTile(
             leading: SvgPicture.asset(
               "assets/icons/phone.svg",
-              width: 30,
+              width: 25,
             ),
             title: Text(
               contact.phone,

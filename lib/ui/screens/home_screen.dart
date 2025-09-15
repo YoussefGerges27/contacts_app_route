@@ -1,6 +1,5 @@
 import 'package:contacts/core/app_colors.dart';
 import 'package:contacts/core/models/contact_model.dart';
-import 'package:contacts/ui/widgets/contact_widget.dart';
 import 'package:contacts/ui/widgets/contacts_screen.dart';
 import 'package:contacts/ui/widgets/custom_modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
