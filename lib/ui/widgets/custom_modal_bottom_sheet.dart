@@ -50,7 +50,9 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
       child: Column(
         spacing: 16,
         children: [
@@ -66,14 +68,19 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                     ),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () => pickImage(),
-                      child: Lottie.asset(
-                        "assets/animations/image_picker.json",
-                      ),
-                    ),
-                  ),
+                  child: image == null
+                      ? Center(
+                          child: GestureDetector(
+                            onTap: () => pickImage(),
+                            child: Lottie.asset(
+                              "assets/animations/image_picker.json",
+                            ),
+                          ),
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.file(image!, fit: BoxFit.cover),
+                        ),
                 ),
               ),
               SizedBox(width: 10),

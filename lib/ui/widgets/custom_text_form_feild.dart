@@ -21,7 +21,9 @@ class CustomTextFormfeild extends StatelessWidget {
       controller: controller,
       onChanged: onChange,
       validator: validator,
+      style: TextStyle(color: AppColors.lightBlue),
       decoration: InputDecoration(
+        counterStyle: TextStyle(color: AppColors.lightBlue),
         contentPadding: EdgeInsets.all(20),
         hintText: hintText,
         hintStyle: TextStyle(

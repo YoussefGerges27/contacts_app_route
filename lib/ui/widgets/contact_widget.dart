@@ -1,6 +1,7 @@
 import 'package:contacts/core/app_colors.dart';
 import 'package:contacts/core/models/contact_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 
 class ContactWidget extends StatelessWidget {
@@ -57,7 +58,10 @@ class ContactWidget extends StatelessWidget {
           ),
 
           ListTile(
-            leading: Icon(Icons.email),
+            leading: SvgPicture.asset(
+              "assets/icons/email.svg",
+              width: 30,
+            ),
             title: Text(
               contact.email,
               style: TextStyle(
@@ -67,7 +71,10 @@ class ContactWidget extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.phone),
+            leading: SvgPicture.asset(
+              "assets/icons/phone.svg",
+              width: 30,
+            ),
             title: Text(
               contact.phone,
               style: TextStyle(
