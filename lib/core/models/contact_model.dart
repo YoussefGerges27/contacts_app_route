@@ -1,5 +1,7 @@
+import 'dart:io';
+
 class ContactModel {
-  final String image;
+  final File? image;
   final String name;
   final String email;
   final String phone;

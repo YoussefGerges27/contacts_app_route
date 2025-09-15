@@ -28,14 +28,17 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
             backgroundColor: AppColors.darkBlue,
             context: context,
             builder: (context) {
-              return CustomModalBottomSheet(
-                contacts: contacts,
-                onAdd: () {
-                  setState(() {});
-                },
+              return SafeArea(
+                child: CustomModalBottomSheet(
+                  contacts: contacts,
+                  onAdd: () {
+                    setState(() {});
+                  },
+                ),
               );
             },
           );

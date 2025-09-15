@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:contacts/core/app_colors.dart';
 import 'package:contacts/core/models/contact_model.dart';
 import 'package:contacts/core/validation.dart';
 import 'package:contacts/ui/widgets/custom_text_form_feild.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 
 class CustomModalBottomSheet extends StatefulWidget {
@@ -25,6 +28,19 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
   final TextEditingController phoneNumberController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  File? image;
+  final ImagePicker picker = ImagePicker();
+
+  Future<void> pickImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+    }
+  }
 
   String name = 'User Name';
   String email = 'example@email.com';
@@ -51,7 +67,12 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Center(
-                    child: Lottie.asset("assets/animations/image_picker.json"),
+                    child: GestureDetector(
+                      onTap: () => pickImage(),
+                      child: Lottie.asset(
+                        "assets/animations/image_picker.json",
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -172,7 +193,7 @@ class _CustomModalBottomSheetState extends State<CustomModalBottomSheet> {
     if (formKey.currentState!.validate()) {
       widget.contacts.add(
         ContactModel(
-          image: "assets/images/messi.png",
+          image: image,
           name: userNameController.text,
           email: emailController.text,
           phone: phoneNumberController.text,

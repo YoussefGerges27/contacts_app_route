@@ -1,6 +1,7 @@
 import 'package:contacts/core/app_colors.dart';
 import 'package:contacts/core/models/contact_model.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ContactWidget extends StatelessWidget {
   final ContactModel contact;
@@ -23,10 +24,19 @@ class ContactWidget extends StatelessWidget {
           Stack(
             alignment: Alignment.bottomLeft,
             children: [
-              Image.asset(
-                "assets/images/messi.png",
-                fit: BoxFit.fill,
-              ),
+              contact.image == null
+                  ? Lottie.asset("assets/animations/image_picker.json")
+                  : ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      ),
+                      child: Image.file(
+                        contact.image!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
+                    ),
               Container(
                 padding: EdgeInsets.all(8),
                 margin: EdgeInsets.all(8),
